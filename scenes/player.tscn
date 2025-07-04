@@ -39,12 +39,5 @@ script = ExtResource("3_qhqgy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="probe"]
 shape = SubResource("CircleShape2D_g2els")
 
-[node name="Label" type="Label" parent="probe"]
-visible = false
-offset_right = 40.0
-offset_bottom = 23.0
-text = "probe
-"
-
 [node name="PlayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_qhqgy")
