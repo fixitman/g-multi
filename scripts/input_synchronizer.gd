@@ -7,10 +7,10 @@ func _ready():
 		set_process(false)
 		set_physics_process(false)
 		
-func _physics_process(delta):
+func _physics_process(_delta):
 	if get_multiplayer_authority() == multiplayer.get_unique_id():
 		input_direction = Input.get_vector("left","right","up","down")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass

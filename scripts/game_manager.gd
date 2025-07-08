@@ -6,7 +6,6 @@ extends Node2D
 func _ready():
 	$%Server.pressed.connect(MultiplayerManager.make_server)
 	$%Client.pressed.connect(MultiplayerManager.make_client)
-	var args = OS.get_cmdline_args()
 	if DisplayServer.get_name() == "headless":
 		MultiplayerManager.make_server()
 	
