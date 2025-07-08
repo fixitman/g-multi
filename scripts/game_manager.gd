@@ -8,11 +8,7 @@ func _ready():
 	$%Client.pressed.connect(MultiplayerManager.make_client)
 	if DisplayServer.get_name() == "headless":
 		MultiplayerManager.make_server()
-	
-	
-	pass # Replace with function body.
-
-
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
