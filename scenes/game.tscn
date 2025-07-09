@@ -37,6 +37,7 @@ layout_mode = 2
 
 [node name="Server" type="Button" parent="HUD/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 text = "Server"
 
@@ -46,11 +47,13 @@ layout_mode = 2
 text = "Client
 "
 
-[node name="spawn_1" type="Marker2D" parent="." groups=["spawn_points"]]
+[node name="spawn_points" type="Node2D" parent="."]
+
+[node name="spawn_1" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
 position = Vector2(647, 283)
 
-[node name="spawn_2" type="Marker2D" parent="." groups=["spawn_points"]]
+[node name="spawn_2" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
 position = Vector2(958, 459)
 
-[node name="spawn_3" type="Marker2D" parent="." groups=["spawn_points"]]
+[node name="spawn_3" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
 position = Vector2(246, 450)
