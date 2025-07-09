@@ -8,6 +8,8 @@ func _ready():
 	$%Client.pressed.connect(MultiplayerManager.make_client)
 	if DisplayServer.get_name() == "headless":
 		MultiplayerManager.make_server()
+	else:
+		MultiplayerManager.make_client()
 	
 	
 	pass # Replace with function body.
