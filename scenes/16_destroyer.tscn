@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c40r0r6y5mry3"]
+
+[ext_resource type="PackedScene" uid="uid://jd20pho4rx8v" path="res://assets/16_Destroyer.glb" id="1_jvr6n"]
+
+[node name="16_Destroyer" instance=ExtResource("1_jvr6n")]
+
+[node name="Light" parent="." index="1"]
+visible = false
+
+[node name="Camera" parent="." index="2"]
+visible = false

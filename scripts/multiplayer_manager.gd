@@ -39,6 +39,7 @@ func add_player(id: int):
 		print("adding player %s" % id)
 		var player2 = player_scene.instantiate()
 		
+		
 		player2.player_id = id
 		player2.name = str(id)
 		players.add_child(player2, true)
@@ -46,9 +47,12 @@ func add_player(id: int):
 		for pt in get_tree().get_nodes_in_group("spawn_points"):			
 			if await player2.is_clear(pt.get_global_position()):
 				player2.set_global_position(pt.get_global_position())
-				#break
+				break
+		
 	else:
 		print("non-server call")
+		
+	
 	
 	
 
