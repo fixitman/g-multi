@@ -15,7 +15,6 @@ position = Vector2(-500, -500)
 
 [node name="HUD" type="Control" parent="."]
 unique_name_in_owner = true
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

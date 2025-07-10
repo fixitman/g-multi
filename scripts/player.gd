@@ -9,8 +9,21 @@ const JUMP_VELOCITY = -400.0
 
 var player_id = 0
 
+func _ready():
+	print("ready")
+
 func _enter_tree():
 	$InputSynchronizer.set_multiplayer_authority(name.to_int())
+	
+	var spawnpts = get_tree().get_nodes_in_group("spawn_points")
+	set_global_position(spawnpts[0].get_global_position())
+	
+	#await get_tree().physics_frame #not sure why this is necessary
+	#for pt in get_tree().get_nodes_in_group("spawn_points"):			
+		#if await is_clear(pt.get_global_position()):
+			#set_global_position(pt.get_global_position())
+			#break
+	
 	
 
 func is_clear(pt: Vector2):
@@ -41,4 +54,4 @@ func _physics_process(delta):
 		else:
 			velocity = lerp(velocity,Vector2.ZERO,lerp_speed * delta)
 	
-		move_and_slide()
+		position += velocity * delta
