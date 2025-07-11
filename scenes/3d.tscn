@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwwli35jc271j"]
+[gd_scene load_steps=7 format=3 uid="uid://dwwli35jc271j"]
 
 [ext_resource type="Texture2D" uid="uid://dc5du3y40v03d" path="res://assets/panorama6.jpg" id="1_ix6ec"]
-[ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="1_tdm2k"]
-[ext_resource type="Script" uid="uid://cwg7doc5x3yda" path="res://scripts/ship.gd" id="2_yhftu"]
+[ext_resource type="Script" uid="uid://78assgvhgbky" path="res://scripts/3d.gd" id="1_yhftu"]
+[ext_resource type="PackedScene" uid="uid://dq41chvo0vfme" path="res://scenes/ship.tscn" id="3_ix6ec"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyai6"]
 panorama = ExtResource("1_ix6ec")
@@ -14,10 +14,8 @@ sky_material = SubResource("PanoramaSkyMaterial_kyai6")
 background_mode = 2
 sky = SubResource("Sky_jauas")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ix6ec"]
-size = Vector3(10, 20.5327, 77.7157)
-
 [node name="3D" type="Node3D"]
+script = ExtResource("1_yhftu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rtr0i")
@@ -32,23 +30,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 88.3083, 0)
 light_energy = 8.146
 omni_range = 1545.41
 
-[node name="ship" type="CharacterBody3D" parent="."]
+[node name="ship" parent="." instance=ExtResource("3_ix6ec")]
 unique_name_in_owner = true
-visible = false
-script = ExtResource("2_yhftu")
-SPEED = 1
-
-[node name="model" parent="ship" instance=ExtResource("1_tdm2k")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ship"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92448, -12.8994)
-shape = SubResource("BoxShape3D_ix6ec")
-
-[node name="Camera3D" type="Camera3D" parent="ship"]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 0.974905, 0.222621, 0, -0.222621, 0.974905, 0, 6.42175, 36.2134)
-current = true
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 480, 0)

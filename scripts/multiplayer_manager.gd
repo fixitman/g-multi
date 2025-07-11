@@ -9,8 +9,9 @@ var hud
 
 
 func _ready():
-	players = get_tree().get_current_scene().get_node("Players")
-	hud = get_tree().get_current_scene().get_node("HUD")
+	#players = get_tree().get_current_scene().get_node("Players")
+	#hud = get_tree().get_current_scene().get_node("HUD")
+	pass
 
 func make_server() :
 	print("making server")
