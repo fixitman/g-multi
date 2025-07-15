@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var roll_rate = -50
 @export var bank_rate = 5
 @export var vroll_rate = 5
-@export var max_roll_deg = 30.0
+@export var max_roll_deg = 20.0
 @export var max_vroll_deg = 20.0
 @export var SPEED = 100
 @export var roll_return = 5.0
@@ -33,10 +33,13 @@ func _physics_process(delta):
 	var pitch = Input.get_axis("up","down")
 	var roll_only = Input.is_action_pressed("roll_only")
 	
-	#transform.basis = Basis()
+	#change actual heading
+	rotate_object_local(Vector3(0,0,1),deg_to_rad(yaw) * roll_rate * delta)
+	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * delta)
 	if not roll_only:
 		rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * delta)
-	
+		
+	#visual effect only
 	if Input.is_action_pressed("left"):
 		visual.rotation_degrees.z = lerp(visual.rotation_degrees.z, max_roll_deg, bank_rate * delta )
 	elif Input.is_action_pressed("right"):
@@ -54,8 +57,7 @@ func _physics_process(delta):
 	clamp(visual.rotation_degrees.x,-max_roll_deg, max_roll_deg)	
 	
 	
-	rotate_object_local(Vector3(0,0,1),deg_to_rad(yaw) * roll_rate * delta)
-	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * delta)
+	
 	
 	
 		
