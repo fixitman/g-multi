@@ -11,7 +11,8 @@ extends CharacterBody3D
 @export var vroll_rate = 5
 @export var max_roll_deg = 20.0
 @export var max_vroll_deg = 20.0
-@export var SPEED = 100
+@export var SPEED = 200
+
 @export var roll_return = 5.0
 
 @export var turn_speed = 10
@@ -34,8 +35,8 @@ func _physics_process(delta):
 	var roll_only = Input.is_action_pressed("roll_only")
 	
 	#change actual heading
-	rotate_object_local(Vector3(0,0,1),deg_to_rad(yaw) * roll_rate * delta)
-	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * delta)
+	rotate_z(deg_to_rad(yaw) * roll_rate * delta)
+	rotate_x(deg_to_rad(pitch) * pitch_rate * delta)
 	if not roll_only:
 		rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * delta)
 		

@@ -1,28 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq41chvo0vfme"]
+[gd_scene load_steps=5 format=3 uid="uid://dq41chvo0vfme"]
 
 [ext_resource type="Script" uid="uid://cwg7doc5x3yda" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="2_4tobq"]
+[ext_resource type="PackedScene" uid="uid://ciw2lq2oi463l" path="res://scenes/gun.tscn" id="3_4tobq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ix6ec"]
-size = Vector3(10, 20.5327, 77.7157)
+size = Vector3(18, 10, 30)
 
 [node name="ship" type="CharacterBody3D"]
 script = ExtResource("1_2gnfn")
-SPEED = 200
 
 [node name="visual" type="Node3D" parent="."]
 
 [node name="model" parent="visual" instance=ExtResource("2_4tobq")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -5)
 
+[node name="Gun" parent="visual" instance=ExtResource("3_4tobq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.6051, -3.83254, 0.50164)
+
+[node name="Gun2" parent="visual" instance=ExtResource("3_4tobq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8772, -3.83254, 0.50164)
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92448, -12.8994)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.174685, 0.419574, 1.38357)
 shape = SubResource("BoxShape3D_ix6ec")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.974726, 0.223404, 0, -0.223404, 0.974726, 0, 19.7033, 36.2134)
-current = true
 far = 10000.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Camera3D2" type="Camera3D" parent="."]
+transform = Transform3D(-0.0565557, -0.661901, 0.747455, -0.0499395, 0.749591, 0.660014, -0.99715, 0, -0.0754487, 19.1371, 12.0476, 0)
+current = true

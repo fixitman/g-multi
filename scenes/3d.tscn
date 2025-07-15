@@ -32,8 +32,3 @@ omni_range = 1545.41
 
 [node name="ship" parent="." instance=ExtResource("3_ix6ec")]
 unique_name_in_owner = true
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 480, 0)
-visible = false
-fov = 17.8

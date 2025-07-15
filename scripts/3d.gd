@@ -1,4 +1,5 @@
 extends Node3D
+@onready var world_environment = $WorldEnvironment
 
 const BOX = preload("res://scenes/box.tscn")
 @export var boxcount = 20
@@ -9,10 +10,10 @@ func _ready():
 		var x = randi() % 10000 -5000
 		var y = randi() % 10000 - 5000
 		var z = randi() % 10000 - 5000
-		add_child(b)
+		world_environment.add_child(b)
 		var v = Vector3(x,y,z)
 		print(v)
-		b.set_global_position(v)
+		b.set_global_position(v) 
 		
 	pass # Replace with function body.
 

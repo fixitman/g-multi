@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://djfsud6qx864s"]
+
+[ext_resource type="Script" uid="uid://e5w5lv5jdiy5" path="res://scripts/bullet.gd" id="1_mkf8s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mkf8s"]
+albedo_color = Color(1, 1, 0.137255, 1)
+emission_enabled = true
+emission = Color(0, 0.847059, 0, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_y25gk"]
+material = SubResource("StandardMaterial3D_mkf8s")
+radius = 0.25
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_l5glv"]
+radius = 0.25
+height = 1.0
+
+[node name="Bullet" type="CharacterBody3D"]
+script = ExtResource("1_mkf8s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_y25gk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_l5glv")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -0.6)
