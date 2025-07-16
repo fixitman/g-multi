@@ -1,8 +1,8 @@
 extends CharacterBody3D
 @onready var camera = %Camera3D
-@onready var ship = %ship
-@onready var visual = $visual
 
+@onready var visual = $visual
+const BULLET = preload("res://scenes/bullet.tscn")
 
 @export var yaw_rate = -25
 @export var pitch_rate = 50
@@ -11,7 +11,7 @@ extends CharacterBody3D
 @export var vroll_rate = 5
 @export var max_roll_deg = 20.0
 @export var max_vroll_deg = 20.0
-@export var SPEED = 200
+@export var SPEED = 100
 
 @export var roll_return = 5.0
 
@@ -35,11 +35,11 @@ func _physics_process(delta):
 	var roll_only = Input.is_action_pressed("roll_only")
 	
 	#change actual heading
-	rotate_z(deg_to_rad(yaw) * roll_rate * delta)
-	rotate_x(deg_to_rad(pitch) * pitch_rate * delta)
 	if not roll_only:
 		rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * delta)
-		
+	#rotate_z(deg_to_rad(yaw) * roll_rate * delta)
+	#rotate_x(deg_to_rad(pitch) * pitch_rate * delta)
+	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * delta)
 	#visual effect only
 	if Input.is_action_pressed("left"):
 		visual.rotation_degrees.z = lerp(visual.rotation_degrees.z, max_roll_deg, bank_rate * delta )
@@ -57,35 +57,24 @@ func _physics_process(delta):
 		visual.rotation_degrees.x = lerp(visual.rotation_degrees.x, 0.0, vroll_rate * delta )
 	clamp(visual.rotation_degrees.x,-max_roll_deg, max_roll_deg)	
 	
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
 	
 	
-	
-	
-		
-	
-	
-
-	velocity = transform.basis.z * -SPEED 
+	velocity = transform.basis.z * -SPEED
 	
 	move_and_slide()
-#func _physics_process(delta):
-	#if Input.is_action_pressed("up"):
-		#global_rotate(transform.basis.x, turn_speed * delta)
-	#if Input.is_action_pressed("down"):
-		#global_rotate(transform.basis.x, -turn_speed * delta)
-	#if Input.is_action_pressed("right"):
-		#global_rotate(transform.basis.y, -turn_speed * delta)
-	#if Input.is_action_pressed("left"):
-		#global_rotate(transform.basis.y, turn_speed * delta)
-	#if Input.is_action_pressed("left"):
-		#global_rotate(transform.basis.z, turn_speed * delta)
-	#if Input.is_action_pressed("right"):
-		#global_rotate(transform.basis.z, -turn_speed * delta)
-		#transform.basis
-	#
-	#move_and_collide(-global_transform.basis.z * SPEED * delta)
-	#
+#
+
+func shoot():
+	var mount_points = get_tree().get_nodes_in_group("gun_mounts")
+	var c = 0
+	for mount_pt in mount_points:
+		var bullet = BULLET.instantiate()
+		add_sibling(bullet)
+		bullet.global_position = mount_pt.global_position 
+		bullet.global_rotation = self.global_rotation
+		if c == 0:
+			bullet.set_color(Color(1,.5,.5))
+		c = c + 1
 		
-	
-	
-	pass

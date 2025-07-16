@@ -7,9 +7,9 @@ const BOX = preload("res://scenes/box.tscn")
 func _ready():
 	for i in range(1,20):
 		var b = BOX.instantiate()
-		var x = randi() % 10000 -5000
-		var y = randi() % 10000 - 5000
-		var z = randi() % 10000 - 5000
+		var x = randi() % 6000 -3000
+		var y = randi() % 6000 - 3000
+		var z = randi() % 6000 - 3000
 		world_environment.add_child(b)
 		var v = Vector3(x,y,z)
 		print(v)

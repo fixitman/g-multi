@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwwli35jc271j"]
+[gd_scene load_steps=8 format=3 uid="uid://dwwli35jc271j"]
 
-[ext_resource type="Texture2D" uid="uid://dc5du3y40v03d" path="res://assets/panorama6.jpg" id="1_ix6ec"]
 [ext_resource type="Script" uid="uid://78assgvhgbky" path="res://scripts/3d.gd" id="1_yhftu"]
+[ext_resource type="Texture2D" uid="uid://dihtll7hm60fm" path="res://assets/panorama_image.png" id="2_yhftu"]
 [ext_resource type="PackedScene" uid="uid://dq41chvo0vfme" path="res://scenes/ship.tscn" id="3_ix6ec"]
+[ext_resource type="PackedScene" uid="uid://d23wigjk32nb3" path="res://scenes/hud.tscn" id="4_yhftu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyai6"]
-panorama = ExtResource("1_ix6ec")
+panorama = ExtResource("2_yhftu")
 
 [sub_resource type="Sky" id="Sky_jauas"]
 sky_material = SubResource("PanoramaSkyMaterial_kyai6")
@@ -32,3 +33,5 @@ omni_range = 1545.41
 
 [node name="ship" parent="." instance=ExtResource("3_ix6ec")]
 unique_name_in_owner = true
+
+[node name="Control" parent="." instance=ExtResource("4_yhftu")]
