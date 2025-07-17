@@ -1,5 +1,6 @@
 extends CharacterBody3D
 @onready var camera = %Camera3D
+@onready var shoot_ray = $shoot_ray
 
 @onready var visual = $visual
 const BULLET = preload("res://scenes/bullet.tscn")
@@ -16,6 +17,8 @@ const BULLET = preload("res://scenes/bullet.tscn")
 @export var roll_return = 5.0
 
 @export var turn_speed = 10
+@export var bullet_range = 5000
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -68,13 +71,30 @@ func _physics_process(delta):
 
 func shoot():
 	var mount_points = get_tree().get_nodes_in_group("gun_mounts")
-	var c = 0
+	var hit = check_for_hit()
+	
 	for mount_pt in mount_points:
 		var bullet = BULLET.instantiate()
 		add_sibling(bullet)
 		bullet.global_position = mount_pt.global_position 
 		bullet.global_rotation = self.global_rotation
-		if c == 0:
-			bullet.set_color(Color(1,.5,.5))
-		c = c + 1
 		
+	if hit:
+	
+		hit.queue_free()
+		
+		
+func check_for_hit():
+	var state = get_world_3d().direct_space_state
+	var start = shoot_ray.global_position
+	var end = start + shoot_ray.global_basis.z * -bullet_range
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = start
+	params.to = end
+	params.collide_with_areas = true
+	params.collide_with_bodies = true
+	var result = state.intersect_ray(params)
+	if result:
+		return result.collider
+	
+	

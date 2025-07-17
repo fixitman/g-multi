@@ -34,3 +34,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7613, -1.28336, -12.505)
 
 [node name="Gun_Mount2" type="Marker3D" parent="." groups=["gun_mounts"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7045, -1.28336, -12.505)
+
+[node name="shoot_ray" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18.2681)
+target_position = Vector3(0, 0, 5000)
