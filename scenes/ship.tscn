@@ -7,6 +7,7 @@
 size = Vector3(18, 10, 30)
 
 [node name="ship" type="CharacterBody3D"]
+transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 script = ExtResource("1_2gnfn")
 
 [node name="visual" type="Node3D" parent="."]
