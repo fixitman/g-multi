@@ -14,7 +14,7 @@ func destroy():
 	mesh.hide()
 	collision_shape_3d.disabled = true
 	e.explode()
-	await get_tree().create_timer(2)
+	#await get_tree().create_timer(2)
 	queue_free()
 	
 	

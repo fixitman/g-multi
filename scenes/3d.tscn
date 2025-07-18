@@ -10,11 +10,15 @@
 panorama = ExtResource("2_yhftu")
 
 [sub_resource type="Sky" id="Sky_jauas"]
+resource_local_to_scene = true
 sky_material = SubResource("PanoramaSkyMaterial_kyai6")
 
 [sub_resource type="Environment" id="Environment_rtr0i"]
 background_mode = 2
+background_energy_multiplier = 3.1
 sky = SubResource("Sky_jauas")
+ambient_light_color = Color(0.213084, 0.609375, 0.152319, 1)
+ambient_light_energy = 0.0
 
 [node name="3D" type="Node3D"]
 script = ExtResource("1_yhftu")
