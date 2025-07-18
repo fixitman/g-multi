@@ -1,21 +1,16 @@
 extends Area3D
+const EXPLOSION = preload("res://scenes/explosion.tscn")
+@onready var mesh = $mesh
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-
-func _on_body_entered(body):
-	queue_free()
-	pass # Replace with function body.
-
-
-func _on_area_entered(area):
-	queue_free()
-	pass # Replace with function body.
+func destroy():
+	var e = EXPLOSION.instantiate()
+	add_sibling(e)
+	e.global_position = self.global_position
+	mesh.hide()
+	e.explode()
+	
+	

@@ -82,15 +82,15 @@ func shoot():
 		bullet.global_rotation = self.global_rotation
 	#	
 	if shoot_cast.is_colliding():
-		var e = EXPLOSION.instantiate()
 		await get_tree().create_timer(.15).timeout
 		for target in shoot_cast.collision_result:
 			var target_pos = target.collider.global_position
-			target.collider.queue_free()
-			add_child(e)
-			e.global_position = target_pos
-			#await get_tree().physics_frame
-			e.explode()
+			var enemy : Node3D = target.collider
+			if enemy.has_method("destroy"):
+				enemy.destroy()
+			else:
+				target.collider.queue_free()
+		
 			
 		
 

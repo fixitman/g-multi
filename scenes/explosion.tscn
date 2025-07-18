@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://ce517tc3nv54s"]
+[gd_scene load_steps=10 format=3 uid="uid://ce517tc3nv54s"]
 
 [ext_resource type="Script" uid="uid://15iggpppsgp4" path="res://scripts/explosion.gd" id="1_17npe"]
+[ext_resource type="AudioStream" uid="uid://c2hojhd0808dm" path="res://assets/explosion.mp3" id="2_nfeox"]
+
+[sub_resource type="Curve" id="Curve_17npe"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_nfeox"]
+curve = SubResource("Curve_17npe")
 
 [sub_resource type="Curve" id="Curve_3oo6d"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75174, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -44,3 +51,10 @@ explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_nfeox")
 draw_pass_1 = SubResource("CylinderMesh_3el85")
+
+[node name="boom" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_nfeox")
+attenuation_model = 3
+volume_db = 56.508
+unit_size = 100.0
+autoplay = true
