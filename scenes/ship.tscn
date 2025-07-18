@@ -12,6 +12,7 @@ radius = 50.0
 [node name="ship" type="CharacterBody3D"]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
 script = ExtResource("1_2gnfn")
+fire_rate = 5.0
 
 [node name="visual" type="Node3D" parent="."]
 
@@ -46,3 +47,7 @@ margin = 0.4
 max_results = 2
 collide_with_areas = true
 debug_shape_custom_color = Color(0, 0.894118, 0, 1)
+
+[node name="firing_timeout" type="Timer" parent="."]
+
+[connection signal="timeout" from="firing_timeout" to="." method="_on_firing_timeout_timeout"]
