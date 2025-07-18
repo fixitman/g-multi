@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce517tc3nv54s"]
+
+[ext_resource type="Script" uid="uid://15iggpppsgp4" path="res://scripts/explosion.gd" id="1_17npe"]
+
+[sub_resource type="CurveTexture" id="CurveTexture_nfeox"]
+
+[sub_resource type="Curve" id="Curve_3oo6d"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75174, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_17npe"]
+curve = SubResource("Curve_3oo6d")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nfeox"]
+particle_flag_align_y = true
+angle_curve = SubResource("CurveTexture_nfeox")
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 7.0
+scale_curve = SubResource("CurveTexture_17npe")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw4cw"]
+albedo_color = Color(1, 0.729899, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.613213, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3el85"]
+material = SubResource("StandardMaterial3D_aw4cw")
+top_radius = 1.0
+bottom_radius = 0.0
+height = 20.0
+
+[node name="explosion" type="Node3D"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+script = ExtResource("1_17npe")
+
+[node name="particles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 24
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_nfeox")
+draw_pass_1 = SubResource("CylinderMesh_3el85")

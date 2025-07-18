@@ -12,7 +12,6 @@ func _ready():
 		var z = randi() % 6000 - 3000
 		world_environment.add_child(b)
 		var v = Vector3(x,y,z)
-		print(v)
 		b.set_global_position(v) 
 		
 	pass # Replace with function body.

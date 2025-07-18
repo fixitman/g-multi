@@ -1,9 +1,11 @@
 extends CharacterBody3D
 @onready var camera = %Camera3D
-@onready var shoot_ray = $shoot_ray
+@onready var shoot_cast = $shoot_cast
+
 
 @onready var visual = $visual
 const BULLET = preload("res://scenes/bullet.tscn")
+const EXPLOSION = preload("res://scenes/explosion.tscn")
 
 @export var yaw_rate = -25
 @export var pitch_rate = 50
@@ -71,30 +73,27 @@ func _physics_process(delta):
 
 func shoot():
 	var mount_points = get_tree().get_nodes_in_group("gun_mounts")
-	var hit = check_for_hit()
 	
+	#show the bullets (visual only)
 	for mount_pt in mount_points:
 		var bullet = BULLET.instantiate()
 		add_sibling(bullet)
 		bullet.global_position = mount_pt.global_position 
 		bullet.global_rotation = self.global_rotation
+	#	
+	if shoot_cast.is_colliding():
+		var e = EXPLOSION.instantiate()
+		await get_tree().create_timer(.15).timeout
+		for target in shoot_cast.collision_result:
+			var target_pos = target.collider.global_position
+			target.collider.queue_free()
+			add_child(e)
+			e.global_position = target_pos
+			#await get_tree().physics_frame
+			e.explode()
+			
 		
-	if hit:
+
 	
-		hit.queue_free()
-		
-		
-func check_for_hit():
-	var state = get_world_3d().direct_space_state
-	var start = shoot_ray.global_position
-	var end = start + shoot_ray.global_basis.z * -bullet_range
-	var params = PhysicsRayQueryParameters3D.new()
-	params.from = start
-	params.to = end
-	params.collide_with_areas = true
-	params.collide_with_bodies = true
-	var result = state.intersect_ray(params)
-	if result:
-		return result.collider
 	
 	

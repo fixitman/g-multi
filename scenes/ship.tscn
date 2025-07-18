@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dq41chvo0vfme"]
+[gd_scene load_steps=5 format=3 uid="uid://dq41chvo0vfme"]
 
 [ext_resource type="Script" uid="uid://cwg7doc5x3yda" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="2_4tobq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ix6ec"]
 size = Vector3(18, 10, 30)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2gnfn"]
+radius = 50.0
 
 [node name="ship" type="CharacterBody3D"]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
@@ -35,6 +38,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7613, -1.28336, -12.505)
 [node name="Gun_Mount2" type="Marker3D" parent="." groups=["gun_mounts"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7045, -1.28336, -12.505)
 
-[node name="shoot_ray" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -18.2681)
-target_position = Vector3(0, 0, 5000)
+[node name="shoot_cast" type="ShapeCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.7018)
+shape = SubResource("SphereShape3D_2gnfn")
+target_position = Vector3(0, 0, -5000)
+margin = 0.4
+max_results = 2
+collide_with_areas = true
+debug_shape_custom_color = Color(0, 0.894118, 0, 1)
