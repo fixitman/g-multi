@@ -1,5 +1,6 @@
 extends Node3D
 @onready var world_environment = $WorldEnvironment
+@onready var hud: Control = $hud
 
 const BOX = preload("res://scenes/box.tscn")
 @export var boxcount = 20
@@ -20,3 +21,6 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+func lock(lock: bool):
+	hud.lock(lock)

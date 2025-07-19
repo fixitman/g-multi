@@ -1,6 +1,7 @@
 extends CharacterBody3D
 @onready var camera = %Camera3D
 @onready var shoot_cast = $shoot_cast
+@onready var _3d: Node3D = $".."
 
 
 @onready var visual = $visual
@@ -25,6 +26,7 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @export var bullet_range = 5000
 
 var firing = false
+var micro = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +36,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	_3d.lock(shoot_cast.is_colliding())
 	pass
 	
 
@@ -41,9 +44,14 @@ func _process(_delta):
 func _physics_process(delta):
 	var yaw = Input.get_axis("left","right")
 	var pitch = Input.get_axis("up","down")
+	if Input.is_action_pressed("micro"):
+		micro = .2
+	else:
+		micro = 1
 	
-	rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * delta)	
-	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * delta)
+	
+	rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * micro * delta)	
+	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * micro * delta)
 	#visual effect only
 	if Input.is_action_pressed("left"):
 		visual.rotation_degrees.z = lerp(visual.rotation_degrees.z, max_roll_deg, bank_rate * delta )
@@ -60,6 +68,9 @@ func _physics_process(delta):
 	else:
 		visual.rotation_degrees.x = lerp(visual.rotation_degrees.x, 0.0, vroll_rate * delta )
 	clamp(visual.rotation_degrees.x,-max_roll_deg, max_roll_deg)	
+	
+	
+	
 	
 	if Input.is_action_pressed("shoot") and not firing:
 		$firing_timeout.wait_time = 1 / fire_rate
