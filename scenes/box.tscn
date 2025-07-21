@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bu1fsukl1ye3h"]
+[gd_scene load_steps=8 format=3 uid="uid://bu1fsukl1ye3h"]
 
 [ext_resource type="Script" uid="uid://tsx4nhrfndf6" path="res://scripts/box.gd" id="1_3inec"]
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3inec"]
+seamless = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oyhfb"]
 albedo_color = Color(0.73, 0.73, 0, 1)
+albedo_texture = SubResource("NoiseTexture2D_3inec")
 emission_enabled = true
 emission = Color(0.666667, 0.611765, 0.113725, 1)
 emission_energy_multiplier = 4.0
@@ -15,6 +19,18 @@ size = Vector3(25, 25, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oq5cr"]
 size = Vector3(25, 25, 25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3inec"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.47451)
+rim = 0.2
+rim_tint = 0.48
+uv1_triplanar_sharpness = 3.24901
+
+[sub_resource type="SphereMesh" id="SphereMesh_telwu"]
+material = SubResource("StandardMaterial3D_3inec")
+radius = 25.0
+height = 50.0
+
 [node name="Box" type="Area3D"]
 script = ExtResource("1_3inec")
 
@@ -23,3 +39,7 @@ mesh = SubResource("BoxMesh_g2tbl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_oq5cr")
+
+[node name="shield" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_telwu")

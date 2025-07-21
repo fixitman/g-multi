@@ -2,10 +2,19 @@ extends Area3D
 const EXPLOSION = preload("res://scenes/explosion.tscn")
 @onready var mesh = $mesh
 @onready var collision_shape_3d = $CollisionShape3D
+@onready var shield: MeshInstance3D = $shield
+
+const MAX_HEALTH = 100
+var health = MAX_HEALTH
 
 
-
-
+func hit(damage:int)-> void:
+	#health -= damage
+	#if health <= 0:
+		#destroy()
+		shield.visible = true
+		await get_tree().create_timer(.2).timeout
+		shield.visible = false
 
 func destroy():
 	var e = EXPLOSION.instantiate()

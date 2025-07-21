@@ -17,6 +17,7 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @export var max_vroll_deg = 20.0
 @export var SPEED = 100
 @export var fire_rate = 8.0
+var gun_damage = 50
 	
 		
 
@@ -36,7 +37,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	_3d.lock(shoot_cast.is_colliding())
+	#_3d.lock(shoot_cast.is_colliding())
 	pass
 	
 
@@ -97,8 +98,8 @@ func shoot():
 	if shoot_cast.is_colliding():
 		await get_tree().create_timer(.15).timeout
 		for target in shoot_cast.collision_result:
-			if target.collider.has_method("destroy"):
-				target.collider.destroy()
+			if target.collider.has_method("hit"):
+				target.collider.hit(gun_damage)
 			else:
 				target.collider.queue_free()
 		
