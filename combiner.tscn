@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvhpt62mctw33"]
+
+[ext_resource type="Shader" uid="uid://dp6rvjrhskr55" path="res://sh_shield.tres" id="1_1xbs0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lyrof"]
+render_priority = 0
+shader = ExtResource("1_1xbs0")
+shader_parameter/ColorParameter = Color(0, 0, 0, 1)
+shader_parameter/ColorParameter2 = Color(0, 0, 0, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_etlpc"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_1xbs0"]
+sky_material = SubResource("ProceduralSkyMaterial_etlpc")
+
+[sub_resource type="Environment" id="Environment_lyrof"]
+background_mode = 2
+sky = SubResource("Sky_1xbs0")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="World" type="Node3D"]
+
+[node name="combiner" type="CSGCombiner3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_lyrof")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="combiner"]
+radius = 50.0
+radial_segments = 24
+rings = 12
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="combiner/CSGSphere3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.4598, 0, -1.98711e-06)
+operation = 2
+radius = 80.0
+radial_segments = 24
+rings = 12
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lyrof")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.987688, -0.125588, 0.0932701, 0, 0.596225, 0.802817, -0.156434, -0.792933, 0.588884, 2.00845, 176.068, 93.1953)
