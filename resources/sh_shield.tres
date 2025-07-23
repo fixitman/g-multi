@@ -77,7 +77,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-349.29, -238.007)
 preview_params/strength = "0.5"
 preview_params/ColorParameter = "Color(0.862745, 0, 0, 1)"
 nodes/fragment/0/position = Vector2(600, 140)

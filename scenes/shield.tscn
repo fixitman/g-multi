@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=4 uid="uid://bk2jle20uob2n"]
 
-[ext_resource type="Shader" uid="uid://dp6rvjrhskr55" path="res://sh_shield.tres" id="1_vtru8"]
+[ext_resource type="Shader" uid="uid://dp6rvjrhskr55" path="res://resources/sh_shield.tres" id="1_vtru8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ohv3a"]
 render_priority = 0

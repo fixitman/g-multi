@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwg7doc5x3yda" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="2_4tobq"]
-[ext_resource type="Material" uid="uid://ce0vef83874y6" path="res://mat_flame.tres" id="3_4tobq"]
+[ext_resource type="Material" uid="uid://ce0vef83874y6" path="res://resources/mat_flame.tres" id="3_4tobq"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tfsc7"]
 top_radius = 1.25
