@@ -3,10 +3,19 @@ extends Node3D
 @onready var hud: Control = $hud
 
 const BOX = preload("res://scenes/box.tscn")
-@export var boxcount = 20
+@export var targets = 20
+@export var time_limit_seconds = 60
+@onready var countdown = $countdown
+
+var targets_remaining = targets
+var time_left = time_limit_seconds
+
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in range(1,20):
+	for i in range(1,targets):
 		var b = BOX.instantiate()
 		var x = randi() % 6000 -3000
 		var y = randi() % 6000 - 3000
@@ -15,12 +24,23 @@ func _ready():
 		var v = Vector3(x,y,z)
 		b.set_global_position(v) 
 		
-	pass # Replace with function body.
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
+	hud.update(time_left, targets_remaining)
 	pass
 
 func lock(lock: bool):
 	hud.lock(lock)
+
+
+func _on_countdown_timeout():
+	time_left -= 1
+	if time_left <= 0:
+		countdown = 0
+		countdown.stop()
+		
+		
+	

@@ -37,3 +37,19 @@ offset_right = 677.0
 offset_bottom = 330.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("3_5ysmq")
+
+[node name="targets" type="Label" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 86.0
+offset_bottom = 33.0
+text = "Targets: 0"
+
+[node name="time" type="Label" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 360.0
+offset_bottom = 33.0
+text = "Time Remaining:   00"

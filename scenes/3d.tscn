@@ -40,3 +40,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="hud" parent="." instance=ExtResource("4_yhftu")]
+
+[node name="countdown" type="Timer" parent="."]
+
+[connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
