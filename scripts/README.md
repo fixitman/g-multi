@@ -17,4 +17,3 @@ Attach `camera.gd` to your Camera node. That's it!
 
 ## License
 [MIT](https://opensource.org/licenses/MIT).
-

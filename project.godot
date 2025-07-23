@@ -17,7 +17,7 @@ config/icon="res://assets/icon.svg"
 
 [autoload]
 
-MultiplayerManager="*res://scripts/multiplayer_manager.gd"
+GameManager="*res://scripts/GameManager.gd"
 
 [dotnet]
 
