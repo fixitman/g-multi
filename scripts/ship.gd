@@ -17,7 +17,7 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @export var max_vroll_deg = 20.0
 @export var SPEED = 100
 @export var fire_rate = 8.0
-var gun_damage = 50
+var gun_damage = 40
 	
 		
 
@@ -28,6 +28,7 @@ var gun_damage = 50
 
 var firing = false
 var micro = 1
+var turbo = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -51,6 +52,13 @@ func _physics_process(delta):
 		micro = 1
 	
 	
+	if Input.is_action_pressed("turbo"):
+		turbo = 5
+	else:
+		turbo = 1
+	
+		
+		
 	rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * micro * delta)	
 	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * micro * delta)
 	#visual effect only
@@ -80,7 +88,7 @@ func _physics_process(delta):
 		shoot()
 	
 	
-	velocity = transform.basis.z * -SPEED
+	velocity = transform.basis.z * -SPEED * turbo
 	
 	move_and_slide()
 #
@@ -99,7 +107,7 @@ func shoot():
 		await get_tree().create_timer(.15).timeout
 		for target in shoot_cast.collision_result:
 			if target.collider.has_method("hit"):
-				target.collider.hit(gun_damage)
+				target.collider.hit(gun_damage,global_position)
 			else:
 				target.collider.queue_free()
 		
