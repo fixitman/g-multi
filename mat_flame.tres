@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://ce0vef83874y6"]
+
+[resource]
+resource_local_to_scene = true
+resource_name = "flame"
+albedo_color = Color(0.984314, 0.803922, 0.0823529, 1)
+emission_enabled = true
+emission = Color(0.941406, 0.642492, 0.104064, 1)
+emission_energy_multiplier = 0.5
