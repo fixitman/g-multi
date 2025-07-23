@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d23wigjk32nb3"]
+[gd_scene load_steps=4 format=3 uid="uid://d23wigjk32nb3"]
 
 [ext_resource type="Script" uid="uid://bcou8avgm765q" path="res://scripts/hud.gd" id="1_oo0fn"]
 [ext_resource type="Script" uid="uid://bnlkxqim5bv8g" path="res://scripts/color_rect.gd" id="2_5ysmq"]
+[ext_resource type="Texture2D" uid="uid://bag84re0uc030" path="res://assets/target_box.png" id="3_5ysmq"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -27,11 +28,12 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_5ysmq")
 
-[node name="lock_indicator" type="ColorRect" parent="."]
+[node name="lock_indicator" type="TextureRect" parent="."]
 visible = false
 layout_mode = 0
-offset_left = 554.0
-offset_top = 214.0
-offset_right = 594.0
-offset_bottom = 254.0
-color = Color(0.694118, 0.235294, 0.14902, 0.65098)
+offset_left = 562.0
+offset_top = 219.0
+offset_right = 677.0
+offset_bottom = 330.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_5ysmq")

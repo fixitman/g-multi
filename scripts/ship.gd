@@ -24,8 +24,8 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @export var bullet_range = 5000
 
 var firing = false
-var micro = 1
-var turbo = 1
+var micro_multiplier = 1
+var turbo_multiplier = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,7 +34,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	#_3d.lock(shoot_cast.is_colliding())
+	_3d.lock(shoot_cast.is_colliding())
 	pass
 	
 
@@ -44,13 +44,13 @@ func _physics_process(delta):
 	var pitch = Input.get_axis("up","down")
 	
 	if Input.is_action_pressed("micro"):
-		micro = .2
+		micro_multiplier = .2
 	else:
-		micro = 1
+		micro_multiplier = 1
 		
 	#ship rotation
-	rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * micro * delta)	
-	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * micro * delta)
+	rotate_object_local(Vector3(0,1,0),deg_to_rad(yaw) * yaw_rate * micro_multiplier * delta)	
+	rotate_object_local(Vector3(1,0,0),deg_to_rad(pitch) * pitch_rate * micro_multiplier * delta)
 	
 	#visual effect only
 	if Input.is_action_pressed("left"):
@@ -59,7 +59,6 @@ func _physics_process(delta):
 		visual.rotation_degrees.z = lerp(visual.rotation_degrees.z, -max_roll_deg, bank_rate * delta )
 	else:
 		visual.rotation_degrees.z = lerp(visual.rotation_degrees.z, 0.0, bank_rate * delta )
-	#clamp(visual.rotation_degrees.z,-max_roll_deg, max_roll_deg)	
 	
 	if Input.is_action_pressed("down"):
 		visual.rotation_degrees.x = lerp(visual.rotation_degrees.x, max_vroll_deg, vroll_rate * delta )
@@ -67,7 +66,6 @@ func _physics_process(delta):
 		visual.rotation_degrees.x = lerp(visual.rotation_degrees.x, -max_vroll_deg, vroll_rate * delta )
 	else:
 		visual.rotation_degrees.x = lerp(visual.rotation_degrees.x, 0.0, vroll_rate * delta )
-	clamp(visual.rotation_degrees.x,-max_roll_deg, max_roll_deg)	
 	
 	if Input.is_action_pressed("turbo"):
 		turbo_on()		
@@ -82,7 +80,7 @@ func _physics_process(delta):
 	
 	
 	#always moving wherever the ship is pointing
-	velocity = transform.basis.z * -SPEED * turbo	
+	velocity = transform.basis.z * -SPEED * turbo_multiplier	
 	move_and_slide()
 #
 
@@ -108,11 +106,11 @@ func _on_firing_timeout_timeout():
 	firing = false
 		
 func turbo_on():
-	turbo = 5
+	turbo_multiplier = 5
 	flame_material.emission_energy_multiplier = 2.5
 
 func turbo_off():
-	turbo = 1
+	turbo_multiplier = 1
 	flame_material.emission_energy_multiplier = .5
 	
 		
