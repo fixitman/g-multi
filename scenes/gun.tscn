@@ -20,6 +20,7 @@ shape = SubResource("SphereShape3D_2gnfn")
 target_position = Vector3(0, 0, -5000)
 margin = 0.4
 max_results = 2
+collision_mask = 2
 collide_with_areas = true
 
 [node name="firing_timeout" type="Timer" parent="."]
