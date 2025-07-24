@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://jfau7eetugm8"]
+
+[ext_resource type="Script" uid="uid://u8nggrb66dlb" path="res://scripts/gun.gd" id="1_x77fm"]
+[ext_resource type="Texture2D" uid="uid://bag84re0uc030" path="res://assets/target_box.png" id="2_og67c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2gnfn"]
+radius = 10.0
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_x77fm")
+
+[node name="Gun_Mount" type="Marker3D" parent="." groups=["gun_mounts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7613, -1.28336, 3.1968)
+
+[node name="Gun_Mount2" type="Marker3D" parent="." groups=["gun_mounts"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7045, -1.28336, 3.1968)
+
+[node name="shoot_cast" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_2gnfn")
+target_position = Vector3(0, 0, -5000)
+margin = 0.4
+max_results = 2
+collide_with_areas = true
+
+[node name="firing_timeout" type="Timer" parent="."]
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="lock_indicator" type="TextureRect" parent="HUD"]
+visible = false
+offset_left = 562.0
+offset_top = 219.0
+offset_right = 677.0
+offset_bottom = 330.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_og67c")
+
+[connection signal="timeout" from="firing_timeout" to="." method="_on_firing_timeout_timeout"]

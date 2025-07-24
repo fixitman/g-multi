@@ -8,6 +8,7 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @onready var flame_material = $visual/flame_port.material_override
 @onready var flame_starboard = $visual/flame_starboard
 @onready var visual = $visual
+@onready var gun = $Gun
 
 @export var yaw_rate = -25
 @export var pitch_rate = 50
@@ -17,11 +18,10 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @export var max_roll_deg = 20.0
 @export var max_vroll_deg = 20.0
 @export var SPEED = 100
-@export var fire_rate = 8.0
-@export var gun_damage = 40
+
 @export var roll_return = 5.0
 @export var turn_speed = 10
-@export var bullet_range = 5000
+
 
 var firing = false
 var micro_multiplier = 1
@@ -29,12 +29,12 @@ var turbo_multiplier = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$firing_timeout.wait_time = 1 / fire_rate
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	_3d.lock(shoot_cast.is_colliding())
+	
 	pass
 	
 
@@ -72,11 +72,7 @@ func _physics_process(delta):
 	else:
 		turbo_off()
 	
-	if Input.is_action_pressed("shoot") and not firing:
-		$firing_timeout.wait_time = 1 / fire_rate
-		firing = true
-		$firing_timeout.start()
-		shoot()
+	
 	
 	
 	#always moving wherever the ship is pointing
@@ -84,26 +80,7 @@ func _physics_process(delta):
 	move_and_slide()
 #
 
-func shoot():
-	var mount_points = get_tree().get_nodes_in_group("gun_mounts")
-	
-	#show the bullets (visual only)
-	for mount_pt in mount_points:
-		var bullet = BULLET.instantiate()
-		add_sibling(bullet)
-		bullet.global_position = mount_pt.global_position 
-		bullet.global_rotation = self.global_rotation
-	#	
-	if shoot_cast.is_colliding():
-		await get_tree().create_timer(.15).timeout
-		for target in shoot_cast.collision_result:
-			if target.collider.has_method("hit"):
-				target.collider.hit(gun_damage,global_position)
-			else:
-				target.collider.queue_free()
-		
-func _on_firing_timeout_timeout():
-	firing = false
+
 		
 func turbo_on():
 	turbo_multiplier = 5

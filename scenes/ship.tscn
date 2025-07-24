@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwg7doc5x3yda" path="res://scripts/ship.gd" id="1_2gnfn"]
 [ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="2_4tobq"]
 [ext_resource type="Material" uid="uid://ce0vef83874y6" path="res://resources/mat_flame.tres" id="3_4tobq"]
+[ext_resource type="PackedScene" uid="uid://jfau7eetugm8" path="res://scenes/gun.tscn" id="4_tfsc7"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tfsc7"]
 top_radius = 1.25
@@ -15,14 +16,11 @@ height = 2.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_ix6ec"]
 size = Vector3(18, 10, 30)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_2gnfn"]
-radius = 10.0
-
 [node name="ship" type="CharacterBody3D"]
 transform = Transform3D(25, 0, 0, 0, 25, 0, 0, 0, 25, 0, 0, 0)
+collision_layer = 8388608
 script = ExtResource("1_2gnfn")
 yaw_rate = -50
-fire_rate = 5.0
 
 [node name="visual" type="Node3D" parent="."]
 
@@ -53,20 +51,4 @@ far = 10000.0
 [node name="Camera3D2" type="Camera3D" parent="."]
 transform = Transform3D(-0.0565557, -0.661901, 0.747455, -0.0499395, 0.749591, 0.660014, -0.99715, 0, -0.0754487, 19.1371, 12.0476, 0)
 
-[node name="Gun_Mount" type="Marker3D" parent="." groups=["gun_mounts"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7613, -1.28336, -12.505)
-
-[node name="Gun_Mount2" type="Marker3D" parent="." groups=["gun_mounts"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.7045, -1.28336, -12.505)
-
-[node name="shoot_cast" type="ShapeCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.7018)
-shape = SubResource("SphereShape3D_2gnfn")
-target_position = Vector3(0, 0, -5000)
-margin = 0.4
-max_results = 2
-collide_with_areas = true
-
-[node name="firing_timeout" type="Timer" parent="."]
-
-[connection signal="timeout" from="firing_timeout" to="." method="_on_firing_timeout_timeout"]
+[node name="Gun" parent="." instance=ExtResource("4_tfsc7")]

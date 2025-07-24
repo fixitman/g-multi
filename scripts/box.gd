@@ -4,9 +4,15 @@ const EXPLOSION = preload("res://scenes/explosion.tscn")
 @onready var collision_shape_3d = $CollisionShape3D
 @onready var shield = $shield
 
+
 const MAX_HEALTH = 100
 var health = MAX_HEALTH
 
+signal _target_destroyed
+
+func _enter_tree():
+	var game = get_node("../..")
+	_target_destroyed.connect(Callable(game, "_on_target_destroyed"))
 
 func hit(damage:int, from: Vector3)-> void:
 	health -= damage
@@ -25,7 +31,8 @@ func destroy():
 	mesh.hide()
 	collision_shape_3d.disabled = true
 	e.explode()
-	#await get_tree().create_timer(2)
+	_target_destroyed.emit()
 	queue_free()
+	
 	
 	

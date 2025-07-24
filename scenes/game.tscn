@@ -1,59 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://pvl57atftt8o"]
+[gd_scene load_steps=8 format=3 uid="uid://dwwli35jc271j"]
 
-[ext_resource type="Script" uid="uid://cqcu6lose7bn5" path="res://scripts/game_manager.gd" id="1_lnu2h"]
+[ext_resource type="Script" uid="uid://78assgvhgbky" path="res://scripts/game.gd" id="1_78awf"]
+[ext_resource type="Texture2D" uid="uid://dihtll7hm60fm" path="res://assets/panorama_image.png" id="1_cpr0p"]
+[ext_resource type="PackedScene" uid="uid://dq41chvo0vfme" path="res://scenes/ship.tscn" id="2_78awf"]
+[ext_resource type="PackedScene" uid="uid://d23wigjk32nb3" path="res://scenes/hud.tscn" id="3_s0nni"]
 
-[node name="Game" type="Node2D"]
-script = ExtResource("1_lnu2h")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kyai6"]
+panorama = ExtResource("1_cpr0p")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://cua40vx3jmf53")
-spawn_path = NodePath("../Players")
+[sub_resource type="Sky" id="Sky_jauas"]
+resource_local_to_scene = true
+sky_material = SubResource("PanoramaSkyMaterial_kyai6")
 
-[node name="Players" type="Node2D" parent="."]
+[sub_resource type="Environment" id="Environment_rtr0i"]
+background_mode = 2
+background_energy_multiplier = 3.1
+sky = SubResource("Sky_jauas")
+ambient_light_color = Color(0.213084, 0.609375, 0.152319, 1)
+ambient_light_energy = 0.0
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_78awf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rtr0i")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.999194, 0.0401318, 0, -0.0401318, 0.999194, 0, 0, 0)
+light_color = Color(0.473992, 0.430701, 0.894925, 1)
+sky_mode = 1
+
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 88.3083, 0)
+light_energy = 8.146
+omni_range = 1545.41
+
+[node name="ship" parent="." instance=ExtResource("2_78awf")]
 unique_name_in_owner = true
-position = Vector2(-500, -500)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="HUD" type="Control" parent="."]
-unique_name_in_owner = true
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="hud" parent="." instance=ExtResource("3_s0nni")]
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
-top_level = true
-layout_mode = 0
-offset_left = 57.0
-offset_top = 54.0
-offset_right = 125.0
-offset_bottom = 130.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+[node name="countdown" type="Timer" parent="."]
+autostart = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
-layout_mode = 2
-
-[node name="Server" type="Button" parent="HUD/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-text = "Server"
-
-[node name="Client" type="Button" parent="HUD/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Client
-"
-
-[node name="spawn_points" type="Node2D" parent="."]
-
-[node name="spawn_1" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
-position = Vector2(647, 283)
-
-[node name="spawn_2" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
-position = Vector2(958, 459)
-
-[node name="spawn_3" type="Marker2D" parent="spawn_points" groups=["spawn_points"]]
-position = Vector2(246, 450)
+[connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
