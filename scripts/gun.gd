@@ -13,9 +13,6 @@ const BULLET = preload("res://scenes/bullet.tscn")
 @export var gun_damage = 40
 @export var bullet_range = 5000
 
-
-
-
 var firing = false
 var mount_points: Array 
 
@@ -27,12 +24,11 @@ func _ready():
 
 
 func _process(delta):
-	var game = get_node("/root/Game")
 	lock(shoot_cast.is_colliding())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	if Input.is_action_pressed("shoot") and not firing:
+	if Input.is_action_pressed("shoot_gun") and not firing:
 		$firing_timeout.wait_time = 1 / fire_rate
 		firing = true
 		$firing_timeout.start()

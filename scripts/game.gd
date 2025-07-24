@@ -35,7 +35,7 @@ func lock(lock: bool):
 func _on_countdown_timeout():
 	time_left -= 1
 	if time_left <= 0:
-		countdown = 0
+		time_left = 0
 		countdown.stop()
 		
 func _on_target_destroyed():

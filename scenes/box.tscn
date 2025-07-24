@@ -21,6 +21,7 @@ size = Vector3(25, 25, 25)
 size = Vector3(25, 25, 25)
 
 [node name="Box" type="Area3D"]
+collision_layer = 2
 script = ExtResource("1_3inec")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
