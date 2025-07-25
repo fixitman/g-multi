@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu1fsukl1ye3h"]
+[gd_scene load_steps=9 format=3 uid="uid://bu1fsukl1ye3h"]
 
 [ext_resource type="Script" uid="uid://tsx4nhrfndf6" path="res://scripts/box.gd" id="1_3inec"]
 [ext_resource type="PackedScene" uid="uid://bk2jle20uob2n" path="res://scenes/shield.tscn" id="2_ks2v0"]
@@ -20,6 +20,17 @@ size = Vector3(25, 25, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_oq5cr"]
 size = Vector3(25, 25, 25)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ks2v0"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_c2ln5"]
+material = SubResource("StandardMaterial3D_ks2v0")
+radius = 20.0
+height = 40.0
+
 [node name="Box" type="Area3D"]
 collision_layer = 2
 script = ExtResource("1_3inec")
@@ -36,3 +47,8 @@ visible = false
 [node name="CSGBakedMeshInstance3D" parent="shield" instance=ExtResource("2_ks2v0")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -9.7477)
 skeleton = NodePath("../..")
+
+[node name="marker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.9201, 0, 0)
+layers = 2
+mesh = SubResource("SphereMesh_c2ln5")
