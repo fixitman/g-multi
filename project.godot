@@ -22,6 +22,8 @@ project/assembly_name="Base Multi"
 [global_group]
 
 spawn_points=""
+targets=""
+player=""
 
 [input]
 

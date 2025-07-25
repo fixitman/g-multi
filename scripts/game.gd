@@ -15,7 +15,7 @@ var time_left = time_limit_seconds
 
 # Called when the node enters the scene tree for the first time.
 func _ready():	
-	for i in range(1,targets):
+	for i in range(0,targets):
 		var b = BOX.instantiate()
 		var x = randi() % 6000 -3000
 		var y = randi() % 6000 - 3000

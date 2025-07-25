@@ -31,7 +31,7 @@ material = SubResource("StandardMaterial3D_ks2v0")
 radius = 20.0
 height = 40.0
 
-[node name="Box" type="Area3D"]
+[node name="Box" type="Area3D" groups=["targets"]]
 collision_layer = 2
 script = ExtResource("1_3inec")
 

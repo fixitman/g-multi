@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://b174xpc07ua21"]
+
+[ext_resource type="Script" uid="uid://ctw3lihfi0rlk" path="res://scripts/minimap.gd" id="1_cvo86"]
+[ext_resource type="Shader" uid="uid://ck4qtd3vegjsg" path="res://minimap.gdshader" id="1_yfyr0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cvo86"]
+shader = ExtResource("1_yfyr0")
+shader_parameter/bg_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/enemy_color = Color(1, 0, 0, 1)
+shader_parameter/point = Vector3(-200, 50, -20)
+shader_parameter/ship_color = Color(0, 0, 1, 1)
+shader_parameter/target_data = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/range = 4000.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0pgu0"]
+
+[node name="Minimap" type="Node3D"]
+script = ExtResource("1_cvo86")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_cvo86")
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+texture = SubResource("CanvasTexture_0pgu0")
