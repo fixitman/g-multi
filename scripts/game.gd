@@ -29,8 +29,8 @@ func _process(_delta):
 	hud.update(time_left, targets_remaining)
 	pass
 
-func lock(lock: bool):
-	hud.lock(lock)
+func lock(_lock: bool):
+	hud.lock(_lock)
 
 func _on_countdown_timeout():
 	time_left -= 1

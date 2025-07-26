@@ -3,8 +3,6 @@ const BULLET = preload("res://scenes/bullet.tscn")
 const EXPLOSION = preload("res://scenes/explosion.tscn")
 
 @onready var camera = %Camera3D
-@onready var shoot_cast = $shoot_cast
-@onready var _3d: Node3D = $".."
 @onready var flame_material = $visual/flame_port.material_override
 @onready var flame_starboard = $visual/flame_starboard
 @onready var visual = $visual

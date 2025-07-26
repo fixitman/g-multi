@@ -5,7 +5,7 @@ extends Control
 @onready var time = $time
 
 func lock(locked: bool):
-	#lock_indicator.visible = locked
+	lock_indicator.visible = locked
 	pass
 	
 func update(seconds: int, targets_left: int ):

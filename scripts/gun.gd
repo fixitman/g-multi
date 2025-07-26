@@ -23,11 +23,11 @@ func _ready():
 	$firing_timeout.wait_time = 1 / fire_rate
 
 
-func _process(delta):
+func _process(_delta):
 	lock(shoot_cast.is_colliding())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	if Input.is_action_pressed("shoot_gun") and not firing:
 		$firing_timeout.wait_time = 1 / fire_rate
 		firing = true
