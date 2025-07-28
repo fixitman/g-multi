@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b174xpc07ua21"]
 
 [ext_resource type="Script" uid="uid://ctw3lihfi0rlk" path="res://scripts/minimap.gd" id="1_cvo86"]
-[ext_resource type="Shader" uid="uid://ck4qtd3vegjsg" path="res://minimap.gdshader" id="1_yfyr0"]
+[ext_resource type="Shader" uid="uid://ck4qtd3vegjsg" path="res://resources/minimap.gdshader" id="1_yfyr0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvo86"]
 shader = ExtResource("1_yfyr0")

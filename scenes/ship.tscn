@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c40r0r6y5mry3" path="res://scenes/16_destroyer.tscn" id="2_4tobq"]
 [ext_resource type="Material" uid="uid://ce0vef83874y6" path="res://resources/mat_flame.tres" id="3_4tobq"]
 [ext_resource type="PackedScene" uid="uid://jfau7eetugm8" path="res://scenes/gun.tscn" id="4_tfsc7"]
-[ext_resource type="PackedScene" uid="uid://b174xpc07ua21" path="res://minimap.tscn" id="5_7j21i"]
+[ext_resource type="PackedScene" uid="uid://b174xpc07ua21" path="res://scenes/minimap.tscn" id="5_7j21i"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_tfsc7"]
 top_radius = 1.25
